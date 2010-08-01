@@ -1,4 +1,11 @@
+h2. Objective:
+
+Read a hash in string format , and assure that it contais nothing but
+numbers , strings and symbols , in order to avoid execution of code 
+that would happen if you use the eval() method , supports nested hashes.
+
 h2. USE:
+
 After installing the gem , you require it:
 
 require 'Tryparse'
