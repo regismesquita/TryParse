@@ -19,34 +19,7 @@ module StringHash
       return cached
     end
 
-    i0 = index
-    r1 = _nt_hash
-    if r1
-      r0 = r1
-    else
-      r2 = _nt_hash_comp
-      if r2
-        r0 = r2
-      else
-        r3 = _nt_componente
-        if r3
-          r0 = r3
-        else
-          r4 = _nt_string
-          if r4
-            r0 = r4
-          else
-            r5 = _nt_symbol
-            if r5
-              r0 = r5
-            else
-              @index = i0
-              r0 = nil
-            end
-          end
-        end
-      end
-    end
+    r0 = _nt_hash
 
     node_cache[:general][start_index] = r0
 
@@ -54,10 +27,6 @@ module StringHash
   end
 
   module Hash0
-    def hash_comp
-      elements[1]
-    end
-
   end
 
   def _nt_hash
@@ -81,17 +50,22 @@ module StringHash
     end
     s0 << r1
     if r1
-      r2 = _nt_hash_comp
+      r3 = _nt_hash_comp
+      if r3
+        r2 = r3
+      else
+        r2 = instantiate_node(SyntaxNode,input, index...index)
+      end
       s0 << r2
       if r2
         if has_terminal?('}', false, index)
-          r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
+          r4 = instantiate_node(SyntaxNode,input, index...(index + 1))
           @index += 1
         else
           terminal_parse_failure('}')
-          r3 = nil
+          r4 = nil
         end
-        s0 << r3
+        s0 << r4
       end
     end
     if s0.last
@@ -112,9 +86,6 @@ module StringHash
       elements[0]
     end
 
-    def hash_comp
-      elements[2]
-    end
   end
 
   def _nt_hash_comp
@@ -128,44 +99,74 @@ module StringHash
       return cached
     end
 
-    i0 = index
-    i1, s1 = index, []
-    r2 = _nt_componente
-    s1 << r2
-    if r2
-      if has_terminal?(',', false, index)
-        r3 = instantiate_node(SyntaxNode,input, index...(index + 1))
-        @index += 1
-      else
-        terminal_parse_failure(',')
-        r3 = nil
-      end
-      s1 << r3
-      if r3
-        r4 = _nt_hash_comp
-        s1 << r4
-      end
-    end
-    if s1.last
-      r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
-      r1.extend(HashComp0)
-    else
-      @index = i1
-      r1 = nil
-    end
+    i0, s0 = index, []
+    r1 = _nt_componente
+    s0 << r1
     if r1
-      r0 = r1
-    else
-      r5 = _nt_componente
-      if r5
-        r0 = r5
-      else
-        @index = i0
-        r0 = nil
+      s2, i2 = [], index
+      loop do
+        r3 = _nt_list_componente
+        if r3
+          s2 << r3
+        else
+          break
+        end
       end
+      r2 = instantiate_node(SyntaxNode,input, i2...index, s2)
+      s0 << r2
+    end
+    if s0.last
+      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0.extend(HashComp0)
+    else
+      @index = i0
+      r0 = nil
     end
 
     node_cache[:hash_comp][start_index] = r0
+
+    r0
+  end
+
+  module ListComponente0
+    def componente
+      elements[1]
+    end
+  end
+
+  def _nt_list_componente
+    start_index = index
+    if node_cache[:list_componente].has_key?(index)
+      cached = node_cache[:list_componente][index]
+      if cached
+        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+        @index = cached.interval.end
+      end
+      return cached
+    end
+
+    i0, s0 = index, []
+    if has_terminal?(', ', false, index)
+      r1 = instantiate_node(SyntaxNode,input, index...(index + 2))
+      @index += 2
+    else
+      terminal_parse_failure(', ')
+      r1 = nil
+    end
+    s0 << r1
+    if r1
+      r2 = _nt_componente
+      s0 << r2
+    end
+    if s0.last
+      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0.extend(ListComponente0)
+    else
+      @index = i0
+      r0 = nil
+    end
+
+    node_cache[:list_componente][start_index] = r0
 
     r0
   end
@@ -190,52 +191,57 @@ module StringHash
 
     i0, s0 = index, []
     i1 = index
-    r2 = _nt_symbol
+    r2 = _nt_hash
     if r2
       r1 = r2
     else
-      r3 = _nt_string
+      r3 = _nt_symbol
       if r3
         r1 = r3
       else
-        r4 = _nt_number
+        r4 = _nt_string
         if r4
           r1 = r4
         else
-          @index = i1
-          r1 = nil
+          r5 = _nt_number
+          if r5
+            r1 = r5
+          else
+            @index = i1
+            r1 = nil
+          end
         end
       end
     end
     s0 << r1
     if r1
-      r5 = _nt_arrow
-      s0 << r5
-      if r5
-        i6 = index
-        r7 = _nt_number
-        if r7
-          r6 = r7
+      r6 = _nt_arrow
+      s0 << r6
+      if r6
+        i7 = index
+        r8 = _nt_number
+        if r8
+          r7 = r8
         else
-          r8 = _nt_symbol
-          if r8
-            r6 = r8
+          r9 = _nt_symbol
+          if r9
+            r7 = r9
           else
-            r9 = _nt_string
-            if r9
-              r6 = r9
+            r10 = _nt_string
+            if r10
+              r7 = r10
             else
-              r10 = _nt_hash
-              if r10
-                r6 = r10
+              r11 = _nt_hash
+              if r11
+                r7 = r11
               else
-                @index = i6
-                r6 = nil
+                @index = i7
+                r7 = nil
               end
             end
           end
         end
-        s0 << r6
+        s0 << r7
       end
     end
     if s0.last
@@ -415,7 +421,7 @@ module StringHash
     end
     s0 << r1
     if r1
-      if has_terminal?('\G[a-z,A-Z]', true, index)
+      if has_terminal?('\G[a-zA-Z]', true, index)
         r2 = true
         @index += 1
       else
@@ -459,7 +465,7 @@ module StringHash
 
     i0 = index
     i1, s1 = index, []
-    if has_terminal?('\G[a-z,A-Z,0-9,_]', true, index)
+    if has_terminal?('\G[a-zA-Z0-9_]', true, index)
       r2 = true
       @index += 1
     else

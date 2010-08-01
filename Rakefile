@@ -5,7 +5,7 @@ require 'rake/gempackagetask'
 require 'spec/rake/spectask'
  
 GEM = "TryParse"
-GEM_VERSION = "0.0.2"
+GEM_VERSION = "0.0.4"
 SUMMARY = "A Gem to parse hash from string, and also a lib to help determine if a string is a Hash object inspect."
 AUTHOR = "Régis Mesquita"
 EMAIL = "regis@regismesquita.com.br"

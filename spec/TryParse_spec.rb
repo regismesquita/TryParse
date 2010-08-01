@@ -1,5 +1,15 @@
-require 'lib/TryParse.rb'
+require 'lib/Tryparse.rb'
 describe "Tryparse" do
+  it "should accept a empty hash" do
+    hashs = [
+      {}
+    ]
+
+    hashs.each do |hash|
+      Tryparse.try(hash.inspect).should eql(true)
+    end
+  end
+ 
   it "should accept a simple string hashs" do
     hashs = [
       { 'b'=>'c' },
@@ -73,5 +83,8 @@ describe "Tryparse" do
       Tryparse.try(hash.inspect).should eql(true)
     end
   end
- 
+  it "should accept multiples hash" do
+    hash = {'teste' => 3, 'd' => :b,:c =>'b'}
+    Tryparse.try(hash.inspect).should eql(true)
+  end
 end

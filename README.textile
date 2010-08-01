@@ -1,3 +1,30 @@
+h2. USE:
+After installing the gem , you require it:
+
+require 'Tryparse'
+then use the try method to make a parse try :
+
+>> Tryparse.try({:this => {"is" => :a_nested_hash}}.inspect)
+=> true
+
+
+Big Hashes:
+
+>> Tryparse.try({ :a => File.open('/etc/passwd').read }.inspect)
+SystemStackError: stack level too deep
+	from /Use...
+
+Since treetop use recursion , when you have a big file inside your hash
+you could exceed the maximum stack size , a Possible workaround would 
+be rising the stack limit.
+$ ulimit -s 15000
+$ irb
+>> require 'Tryparse.rb'
+=> true
+>>  Tryparse.try({ :a => File.open('/etc/passwd').read }.inspect)
+=> true
+
+
 h2. LICENSE:
 
 This software is licensed under the terms of the brazilian portuguese translation of the GPL
