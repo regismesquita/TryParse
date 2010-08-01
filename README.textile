@@ -1,24 +1,19 @@
 h2. LICENSE:
 
-(The MIT License)
+  This software is licensed under the terms of the brazilian portuguese translation of the GPL
+  You should have received a version of this translation with your software if not , you should
+  download this license from http://www.magnux.org/doc/GPL-pt_BR.txt , That being said , the
+  Official license of this software is this translation making the Original GPL a license similar
+  to the one used in this software written in english , That legal maneuver is necessary since 
+  english documents don't have legal value in brazil.
 
-Copyright (c) 2008 FIX
+  Hope FSF which I am a member , don't sue me.
 
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+  A licença oficial para este software é a tradução da GPL que acompanha este software , tendo em vista
+  que documentos em ingles não válidos para a justiça brasileira , é necessario esta manobra legal , onde
+  digo que a licença oficial para este software é esta tradução e a GPL oficial é meramente uma 
+  licença muito similar escrita em inglês, caso você não tenha recebido esta cópia de licença a mesma pode ser
+  baixada no seguinte sitio: http://www.magnux.org/doc/GPL-pt_BR.txt  .
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+  Espero que a FSF da qual sou membro , não me processe.
 
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
