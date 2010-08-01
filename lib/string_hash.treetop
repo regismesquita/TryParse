@@ -1,0 +1,29 @@
+grammar StringHash
+  rule general
+    hash / hash_comp / componente / string / symbol
+  end
+  rule hash
+   '{'  hash_comp '}'
+  end
+  rule hash_comp
+    (componente ',' hash_comp) / componente
+  end
+  rule componente
+    ( symbol / string / number) '=>' ( number / symbol / string / hash )
+  end 
+  rule string
+    '"' string_content '"'
+  end
+  rule string_content
+    [^'"'] string_content / [^'"']
+  end
+  rule symbol
+    ':' symbol_content
+  end
+  rule number
+   [0-9] [0-9]*
+  end
+  rule symbol_content
+   [^(' '/=)] symbol_content / [^(' '/=)]
+  end
+end
