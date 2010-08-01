@@ -5,7 +5,7 @@ require 'rake/gempackagetask'
 require 'spec/rake/spectask'
  
 GEM = "TryParse"
-GEM_VERSION = "0.0.1"
+GEM_VERSION = "0.0.2"
 SUMMARY = "A Gem to parse hash from string, and also a lib to help determine if a string is a Hash object inspect."
 AUTHOR = "Régis Mesquita"
 EMAIL = "regis@regismesquita.com.br"
@@ -19,7 +19,7 @@ spec = Gem::Specification.new do |s|
   s.summary = SUMMARY
   s.require_paths = ['lib']
   s.files = FileList['app_generators/**/*', 'bin/*', 'lib/**/*.rb', '[A-Z]*'].to_a
-  
+  s.add_dependency('treetop')
   s.author = AUTHOR
   s.email = EMAIL
   s.homepage = HOMEPAGE

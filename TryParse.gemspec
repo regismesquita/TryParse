@@ -2,13 +2,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{TryParse}
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["R\303\251gis Mesquita"]
   s.date = %q{2010-08-01}
   s.email = %q{regis@regismesquita.com.br}
-  s.files = ["lib/string_hash.rb", "lib/TryParse.rb", "Rakefile", "README", "README.textile"]
+  s.files = ["lib/string_hash.rb", "lib/TryParse.rb", "Rakefile", "README", "README.textile", "TryParse.gemspec"]
   s.homepage = %q{http://regismesquita.com}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.5}
@@ -19,8 +19,11 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<treetop>, [">= 0"])
     else
+      s.add_dependency(%q<treetop>, [">= 0"])
     end
   else
+    s.add_dependency(%q<treetop>, [">= 0"])
   end
 end
