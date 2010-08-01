@@ -368,7 +368,11 @@ module StringHash
 
   module Symbol0
     def symbol_content
-      elements[1]
+      elements[2]
+    end
+
+    def epsilon
+      elements[3]
     end
   end
 
@@ -393,8 +397,21 @@ module StringHash
     end
     s0 << r1
     if r1
-      r2 = _nt_symbol_content
+      if has_terminal?('\G[^(\' \'/=)]', true, index)
+        r2 = true
+        @index += 1
+      else
+        r2 = nil
+      end
       s0 << r2
+      if r2
+        r3 = _nt_symbol_content
+        s0 << r3
+        if r3
+          r4 = _nt_epsilon
+          s0 << r4
+        end
+      end
     end
     if s0.last
       r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
@@ -405,59 +422,6 @@ module StringHash
     end
 
     node_cache[:symbol][start_index] = r0
-
-    r0
-  end
-
-  module Number0
-  end
-
-  def _nt_number
-    start_index = index
-    if node_cache[:number].has_key?(index)
-      cached = node_cache[:number][index]
-      if cached
-        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
-        @index = cached.interval.end
-      end
-      return cached
-    end
-
-    i0, s0 = index, []
-    if has_terminal?('\G[0-9]', true, index)
-      r1 = true
-      @index += 1
-    else
-      r1 = nil
-    end
-    s0 << r1
-    if r1
-      s2, i2 = [], index
-      loop do
-        if has_terminal?('\G[0-9]', true, index)
-          r3 = true
-          @index += 1
-        else
-          r3 = nil
-        end
-        if r3
-          s2 << r3
-        else
-          break
-        end
-      end
-      r2 = instantiate_node(SyntaxNode,input, i2...index, s2)
-      s0 << r2
-    end
-    if s0.last
-      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
-      r0.extend(Number0)
-    else
-      @index = i0
-      r0 = nil
-    end
-
-    node_cache[:number][start_index] = r0
 
     r0
   end
@@ -517,6 +481,83 @@ module StringHash
     end
 
     node_cache[:symbol_content][start_index] = r0
+
+    r0
+  end
+
+  module Number0
+  end
+
+  def _nt_number
+    start_index = index
+    if node_cache[:number].has_key?(index)
+      cached = node_cache[:number][index]
+      if cached
+        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+        @index = cached.interval.end
+      end
+      return cached
+    end
+
+    i0, s0 = index, []
+    if has_terminal?('\G[0-9]', true, index)
+      r1 = true
+      @index += 1
+    else
+      r1 = nil
+    end
+    s0 << r1
+    if r1
+      s2, i2 = [], index
+      loop do
+        if has_terminal?('\G[0-9]', true, index)
+          r3 = true
+          @index += 1
+        else
+          r3 = nil
+        end
+        if r3
+          s2 << r3
+        else
+          break
+        end
+      end
+      r2 = instantiate_node(SyntaxNode,input, i2...index, s2)
+      s0 << r2
+    end
+    if s0.last
+      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0.extend(Number0)
+    else
+      @index = i0
+      r0 = nil
+    end
+
+    node_cache[:number][start_index] = r0
+
+    r0
+  end
+
+  def _nt_epsilon
+    start_index = index
+    if node_cache[:epsilon].has_key?(index)
+      cached = node_cache[:epsilon][index]
+      if cached
+        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+        @index = cached.interval.end
+      end
+      return cached
+    end
+
+    if has_terminal?('', false, index)
+      r0 = instantiate_node(SyntaxNode,input, index...(index + 0))
+      @index += 0
+    else
+      terminal_parse_failure('')
+      r0 = nil
+    end
+
+    node_cache[:epsilon][start_index] = r0
 
     r0
   end

@@ -18,12 +18,15 @@ grammar StringHash
     [^'"'] string_content / [^'"']
   end
   rule symbol
-    ':' symbol_content
+    ':' [^(' '/=)] symbol_content epsilon
+  end
+  rule symbol_content
+     [^(' '/=)] symbol_content / [^(' '/=)] 
   end
   rule number
    [0-9] [0-9]*
   end
-  rule symbol_content
-   [^(' '/=)] symbol_content / [^(' '/=)]
+  rule epsilon
+    ''
   end
 end
