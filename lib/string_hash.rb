@@ -171,6 +171,10 @@ module StringHash
   end
 
   module Componente0
+    def arrow
+      elements[1]
+    end
+
   end
 
   def _nt_componente
@@ -205,13 +209,7 @@ module StringHash
     end
     s0 << r1
     if r1
-      if has_terminal?('=>', false, index)
-        r5 = instantiate_node(SyntaxNode,input, index...(index + 2))
-        @index += 2
-      else
-        terminal_parse_failure('=>')
-        r5 = nil
-      end
+      r5 = _nt_arrow
       s0 << r5
       if r5
         i6 = index
@@ -366,13 +364,33 @@ module StringHash
     r0
   end
 
+  def _nt_arrow
+    start_index = index
+    if node_cache[:arrow].has_key?(index)
+      cached = node_cache[:arrow][index]
+      if cached
+        cached = SyntaxNode.new(input, index...(index + 1)) if cached == true
+        @index = cached.interval.end
+      end
+      return cached
+    end
+
+    if has_terminal?('=>', false, index)
+      r0 = instantiate_node(SyntaxNode,input, index...(index + 2))
+      @index += 2
+    else
+      terminal_parse_failure('=>')
+      r0 = nil
+    end
+
+    node_cache[:arrow][start_index] = r0
+
+    r0
+  end
+
   module Symbol0
     def symbol_content
       elements[2]
-    end
-
-    def epsilon
-      elements[3]
     end
   end
 
@@ -397,7 +415,7 @@ module StringHash
     end
     s0 << r1
     if r1
-      if has_terminal?('\G[^(\' \'/=)]', true, index)
+      if has_terminal?('\G[a-z,A-Z]', true, index)
         r2 = true
         @index += 1
       else
@@ -407,10 +425,6 @@ module StringHash
       if r2
         r3 = _nt_symbol_content
         s0 << r3
-        if r3
-          r4 = _nt_epsilon
-          s0 << r4
-        end
       end
     end
     if s0.last
@@ -445,7 +459,7 @@ module StringHash
 
     i0 = index
     i1, s1 = index, []
-    if has_terminal?('\G[^(\' \'/=)]', true, index)
+    if has_terminal?('\G[a-z,A-Z,0-9,_]', true, index)
       r2 = true
       @index += 1
     else
@@ -466,12 +480,7 @@ module StringHash
     if r1
       r0 = r1
     else
-      if has_terminal?('\G[^(\' \'/=)]', true, index)
-        r4 = true
-        @index += 1
-      else
-        r4 = nil
-      end
+      r4 = _nt_epsilon
       if r4
         r0 = r4
       else

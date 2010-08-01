@@ -9,7 +9,7 @@ grammar StringHash
     (componente ',' hash_comp) / componente
   end
   rule componente
-    ( symbol / string / number) '=>' ( number / symbol / string / hash )
+    ( symbol / string / number) arrow ( number / symbol / string / hash )
   end 
   rule string
     '"' string_content '"'
@@ -17,11 +17,14 @@ grammar StringHash
   rule string_content
     [^'"'] string_content / [^'"']
   end
+  rule arrow
+    '=>'
+  end
   rule symbol
-    ':' [^(' '/=)] symbol_content epsilon
+    ':' [a-z,A-Z] symbol_content 
   end
   rule symbol_content
-     [^(' '/=)] symbol_content / [^(' '/=)] 
+     ( [a-z,A-Z,0-9,_] symbol_content ) / epsilon
   end
   rule number
    [0-9] [0-9]*
