@@ -18,7 +18,7 @@ grammar StringHash
     '"' string_content '"'
   end
   rule string_content
-    [^'"'] string_content / [^'"']
+    ( '\\"' )* ( [^'"'] string_content / [^'"'] )
   end
   rule arrow
     '=>'

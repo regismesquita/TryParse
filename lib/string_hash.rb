@@ -317,6 +317,9 @@ module StringHash
     end
   end
 
+  module StringContent1
+  end
+
   def _nt_string_content
     start_index = index
     if node_cache[:string_content].has_key?(index)
@@ -328,41 +331,69 @@ module StringHash
       return cached
     end
 
-    i0 = index
-    i1, s1 = index, []
-    if has_terminal?('\G[^\'"\']', true, index)
-      r2 = true
-      @index += 1
-    else
-      r2 = nil
+    i0, s0 = index, []
+    s1, i1 = [], index
+    loop do
+      if has_terminal?('\\"', false, index)
+        r2 = instantiate_node(SyntaxNode,input, index...(index + 2))
+        @index += 2
+      else
+        terminal_parse_failure('\\"')
+        r2 = nil
+      end
+      if r2
+        s1 << r2
+      else
+        break
+      end
     end
-    s1 << r2
-    if r2
-      r3 = _nt_string_content
-      s1 << r3
-    end
-    if s1.last
-      r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
-      r1.extend(StringContent0)
-    else
-      @index = i1
-      r1 = nil
-    end
+    r1 = instantiate_node(SyntaxNode,input, i1...index, s1)
+    s0 << r1
     if r1
-      r0 = r1
-    else
+      i3 = index
+      i4, s4 = index, []
       if has_terminal?('\G[^\'"\']', true, index)
-        r4 = true
+        r5 = true
         @index += 1
       else
+        r5 = nil
+      end
+      s4 << r5
+      if r5
+        r6 = _nt_string_content
+        s4 << r6
+      end
+      if s4.last
+        r4 = instantiate_node(SyntaxNode,input, i4...index, s4)
+        r4.extend(StringContent0)
+      else
+        @index = i4
         r4 = nil
       end
       if r4
-        r0 = r4
+        r3 = r4
       else
-        @index = i0
-        r0 = nil
+        if has_terminal?('\G[^\'"\']', true, index)
+          r7 = true
+          @index += 1
+        else
+          r7 = nil
+        end
+        if r7
+          r3 = r7
+        else
+          @index = i3
+          r3 = nil
+        end
       end
+      s0 << r3
+    end
+    if s0.last
+      r0 = instantiate_node(SyntaxNode,input, i0...index, s0)
+      r0.extend(StringContent1)
+    else
+      @index = i0
+      r0 = nil
     end
 
     node_cache[:string_content][start_index] = r0

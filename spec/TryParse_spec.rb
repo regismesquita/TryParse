@@ -87,4 +87,8 @@ describe "Tryparse" do
     hash = {'teste' => 3, 'd' => :b,:c =>'b'}
     Tryparse.try(hash.inspect).should eql(true)
   end
+  it "should accept escaped caracters" do
+    hash = {'teste' => 3,:escape => "t\"t", 'd' => :b,:c =>'b'}
+    Tryparse.try(hash.inspect).should eql(true)
+  end
 end
