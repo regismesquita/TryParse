@@ -1,6 +1,6 @@
 grammar StringHash
   rule general
-    hash # / hash_comp / componente / string / symbol
+    hash
   end
   rule hash
    '{' hash_comp? '}'
